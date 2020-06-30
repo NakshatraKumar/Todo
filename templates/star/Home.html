@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{%extends 'star/Base.html'%}
+{%load crispy_forms_tags%}
+{%block child_block%}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">Todo Application</a>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-body h-100">
+                <h1>Add Task Here !!!</h1>
+                <form method="post">
+                    {%csrf_token%}
+                    {{form|crispy}}
+                    <input type="submit" value="Add Task" class="btn btn-primary btn-lg" name = "content">
+                </form>
+                <hr>
+                <ul class="list-group">
+                    {%for tas in tasks%}
+                        <li class="list-group-item">{{tas.task}}
+                        <div class="float-right">
+                            <a type="button" class="btn btn-danger" href="delete/{{tas.id}}/">Delete</a>
+                        </div>
+                        </li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
